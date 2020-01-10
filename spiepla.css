@@ -1,0 +1,229 @@
+
+/*FONTS*/
+
+
+/*new spie spie*/
+/*spielplan menu*/
+.spiemenu{
+    margin-bottom: 30px;
+    padding:10px;
+    padding-left:11%;
+    
+    width:100%;
+    color: #ee6600;
+    font-size: 25px;
+    
+    font-family: CochinBold;
+    background: #e2e0db;
+    position: fixed;
+    
+    z-index:20;
+    
+}
+.spiemenu span{
+    padding:10px;
+    cursor: pointer;
+    
+}
+
+#spiedisp{
+
+}
+
+#spienext{
+
+}
+
+#spienextnext{
+
+}
+
+/*spielplan alle termine*/
+.spielplan{
+    margin-left:11%;
+    width:100%;
+    max-width:1004px;
+    overflow:hidden;
+    padding-top:5%
+    
+}
+/*pro Termin*/
+.termin{
+    
+    width:100%;
+
+    margin-bottom:5px;
+}
+
+.termin:after { 
+	color:#59635E;
+	font-size:20px;
+    letter-spacing: 5px;
+}
+
+/*termin info und best*/
+.termininfo{
+    width:63%;
+    display:inline-block;
+}
+
+
+/*betsel region*/
+.terminbest{
+    vertical-align:top;
+    width:24%;
+    heigth:auto;
+    display:inline-block;
+    place-items: center;
+    color:#e4c9b2;
+    font-size: 25px;
+    font-style: normal;
+    font-family: RotisRegular;
+}
+
+.terminbest input{
+    
+    width:200px;
+    
+}
+
+.ausverk{
+    /*width:290px;*/
+    height:50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:#ee6600;
+}
+.bestk{
+    /*width:290px;*/
+    height:50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #18a02b;
+    cursor: pointer;
+}
+
+.keinek{
+    /*width:290px;*/
+    height:50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #59635e;
+}
+
+/*tag datum uhrzeit*/
+.terminlayer1{
+    
+    display:inline-block;
+    color:#59635e;
+    margin-rigth:2%;
+    font-size: 17px;
+    font-style: normal;
+    font-family: RotisBold;
+}
+.terminlayer1 input{
+    color:#59635e;
+    font-size: 17px;
+    font-style: normal;
+    font-family: RotisBold;
+    width: 50px;
+}
+.spietag{
+    line-height: 100%;
+    font-size: 30px;
+    font-family: CochinBold;
+}
+
+.spiedatum{
+    margin-top:50px;
+}
+
+.spieuhr{
+}
+
+/*Sondertitel*/
+.terminlayer2{
+    color: #ee6600;
+    font-size: 17px;
+    margin-top:10px;
+    font-family: CochinBold;
+}
+
+/*titel*/
+.terminlayer3{
+    color: #ee6600;
+    line-height: 120%;
+    font-size: 30px;
+    margin-top:15px;
+    font-family: CochinBold;
+    cursor: pointer;
+}
+
+/*Untertitel*/
+.terminlayer4{
+    color:#59635e;
+    font-size: 17px;
+    font-style: normal;
+    font-family: RotisBold;
+}
+
+.terminlayer5{
+    color:#59635e;
+    font-size: 17px;
+    font-style: normal;
+    font-family: RotisBold;
+}
+
+/*text given*/
+.terminlayeradd{
+    padding:5px;
+    background:#59635e;
+    color:white;
+    font-size: 17px;
+    font-style: normal;
+    font-family: RotisBold;
+}
+.close{
+    padding:5px;
+    cursor: pointer;
+    color:black;
+    font-size: 20px;
+    font-style: bold;
+    font-family: RotisBold;
+}
+
+/*send edit and spi all menu*/
+.spielsmenu{
+    border: 1px solid gray;
+    color:#59635e;
+    font-size: 17px;
+    font-style: normal;
+    font-family: Arial;
+    margin-bottom:50px;
+    
+}
+
+.spielsmenu span{
+    cursor: pointer;
+    margin:5px;
+}
+
+.spiesend{
+    
+    cursor: pointer;
+    color: #ee6600;
+    font-size: 30px;
+    margin-top:15px;
+    font-family: Arial;
+}
+
+
+
+
+
+
+
+
