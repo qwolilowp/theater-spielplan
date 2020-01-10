@@ -13,8 +13,8 @@ Eingabe der vorbereiteten Daten im CSV Format. Die Datei ist aus Exel / OO zu ex
 
 # Ansicht 1
 
-![Spielplanansicht 1](/doku/an1.png)
+![Spielplanansicht 1](/doku/ans1.png)
 
 # Ansicht 2
 
-![Spielplanansicht 2](/doku/na2.png)
+![Spielplanansicht 2](/doku/ans2.png)
