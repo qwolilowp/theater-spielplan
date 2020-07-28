@@ -8,23 +8,28 @@ let CVStext = "";
 let CVSname = "";
 let otherCSV = [];
 let lemIDtoliveIN = "";
-getallcsv();
+
 
 /* ENTER FUNCTION */
 function spipla(){
-	console.log("Theater Javascript Spielplan rendering start");
-    //inpspie( "content" );
-    //makespie( "content" );
-    makespieZ( "content" );
-
-    //editspiepla( "content" );
+    console.log("Theater Javascript Spielplan rendering start");
+    if( otherCSV.length === 0 ){
+        //getallcsv( inpspie, "content" );
+        //getallcsv( makespie, "content" );
+        getallcsv( makespieZ, "content" );
+        //getallcsv( editspiepla, "content" );
+    } else {
+        //inpspie( "content" );
+        //makespie( "content" );
+        makespieZ( "content" );
+        //editspiepla( "content" );
+    }
 }
 
 
 
 /*MAKE SPIELPLAN*/
 function makespie( elemID ){ 
-    //getallcsv();
     console.log("Just make spie");
     lemIDtoliveIN = elemID;
 	let intoElem = document.getElementById( elemID );
@@ -185,7 +190,11 @@ function makespie( elemID ){
             //uhrzeit beginn            
             let beginn = document.createElement( "div" );
             beginn.className = "spieuhr";
-            beginn.innerHTML = data[ 1 ] + " Uhr";
+            if( data[ 1 ] != "" ){
+                beginn.innerHTML = data[ 1 ] + " Uhr";
+            } else {
+                beginn.innerHTML = " &nbsp;&nbsp;&nbsp;";
+            }
             layer1.appendChild( beginn );
 
             //add data to 
@@ -208,7 +217,6 @@ function makespie( elemID ){
 }
 
 function makespieZ( elemID ){ //all stacked display version (not so nice but mor robust i think)
-    //getallcsv();
     console.log("Just make spie");
     lemIDtoliveIN = elemID;
 	let intoElem = document.getElementById( elemID );
@@ -246,7 +254,7 @@ function makespieZ( elemID ){ //all stacked display version (not so nice but mor
     console.log("This Mo", currmonatzahl, "n", currmonatzahlo, "nn", currmonatzahloo);
     
     for( let c = 0; c < otherCSV.length; c++){
-        //console.log(currmonatzahl == otherCSV[ c ].split("-")[0], currmonatzahl, otherCSV[ c ].split("-")[0]);
+        console.log(currmonatzahl == otherCSV[ c ].split("-")[0], currmonatzahl, otherCSV[ c ].split("-")[0]);
         if( currmonatzahl == otherCSV[ c ].split("-")[0] || 
             currmonatzahlo == otherCSV[ c ].split("-")[0] || 
             currmonatzahloo == otherCSV[ c ].split("-")[0] ){
@@ -362,7 +370,11 @@ function makespieZ( elemID ){ //all stacked display version (not so nice but mor
             //uhrzeit beginn            
             let beginn = document.createElement( "span" );
             beginn.className = "spieuhr";
-            beginn.innerHTML = data[ 1 ] + " Uhr";
+            if( data[ 1 ] !== "" ){
+                beginn.innerHTML = data[ 1 ] + " Uhr";
+            } else {
+                beginn.innerHTML = " &nbsp;&nbsp;&nbsp;";
+            }
             layer1.appendChild( beginn );
 
             //add data to 
@@ -382,7 +394,6 @@ function makespieZ( elemID ){ //all stacked display version (not so nice but mor
 
 /* EDIT A SPIELPLAN */
 function editspiepla( elemID ){
-    //getallcsv();
     console.log("ed spie");
     
     lemIDtoliveIN = elemID;
@@ -666,21 +677,22 @@ function resethttp(){
     return http;
 }
 
-function getallcsv(){
-    if( otherCSV.length == 0 ){
+function getallcsv( fkttocall, elmid ){
+    if( otherCSV.length === 0 ){
         //console.log("alle csv getting");
         function returnthis( ){
-            console.log(http);
+            //console.log("all csv get", http);
 		    if ( http.readyState == 4 && http.status == 200 ) {
                 let ent = http.responseText.split(";;");
+                //console.log("got it", ent)
                 if( otherCSV.length == 0 ){
                     for( let e = 2; e < ent.length; e++ ){
-                           console.log( ent[ e ]);
+                           console.log( "aa", ent[ e ]);
                             otherCSV.push(ent[ e ].replace(".csv", ""));
                         
                     }
+                    fkttocall( elmid );
                 }
-                //console.log( "all csv",  );
 		    }
         }
         let http = resethttp( );
@@ -874,4 +886,3 @@ function cleantext( atext ){
     let t22 = t21.split("&amp;").join("&");
     return t22;
 }
-
