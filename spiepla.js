@@ -8,7 +8,7 @@ let CVStext = "";
 let CVSname = "";
 let otherCSV = [];
 let lemIDtoliveIN = "";
-
+let onece = true;
 
 /* ENTER FUNCTION */
 function spipla(){
@@ -29,6 +29,12 @@ function spipla(){
 
 
 /*MAKE SPIELPLAN*/
+function showfirstofmonth(){
+    let menuelem = document.getElementsByClassName( "spiemenu" )[0];
+    console.log(menuelem.children[0]);
+    settoopen(menuelem.children[0]);
+}
+
 function makespie( elemID ){ 
     console.log("Just make spie");
     lemIDtoliveIN = elemID;
@@ -214,6 +220,10 @@ function makespie( elemID ){
         scrolltoElem();
     }
     corrhorpos();
+    if(onece){
+        setTimeout( showfirstofmonth, 1000 );
+        onece = false;
+    }
 }
 
 function makespieZ( elemID ){ //all stacked display version (not so nice but mor robust i think)
@@ -390,6 +400,10 @@ function makespieZ( elemID ){ //all stacked display version (not so nice but mor
         scrolltoElem();
     }
     corrhorpos();
+    if(onece){
+        setTimeout( showfirstofmonth, 1000 );
+        onece = false;
+    }
 }
 
 /* EDIT A SPIELPLAN */
