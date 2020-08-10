@@ -16,13 +16,13 @@ function spipla(){
     if( otherCSV.length === 0 ){
         //getallcsv( inpspie, "content" );
         //getallcsv( makespie, "content" );
-        getallcsv( makespieZ, "content" );
-        //getallcsv( editspiepla, "content" );
+        //getallcsv( makespieZ, "content" );
+        getallcsv( editspiepla, "content" );
     } else {
         //inpspie( "content" );
         //makespie( "content" );
-        makespieZ( "content" );
-        //editspiepla( "content" );
+        //makespieZ( "content" );
+        editspiepla( "content" );
     }
 }
 
@@ -31,8 +31,8 @@ function spipla(){
 /*MAKE SPIELPLAN*/
 function showfirstofmonth(){
     let menuelem = document.getElementsByClassName( "spiemenu" )[0];
-    console.log(menuelem.children[0]);
-    settoopen(menuelem.children[0]);
+    //settoopen(menuelem.children[0]);
+    menuelem.children[0].dispatchEvent(new MouseEvent("click",{bubbles: true, cancellable: true}));
 }
 
 function makespie( elemID ){ 
@@ -196,7 +196,7 @@ function makespie( elemID ){
             //uhrzeit beginn            
             let beginn = document.createElement( "div" );
             beginn.className = "spieuhr";
-            if( data[ 1 ] != "" ){
+            if( data[ 1 ] !== "" ){
                 beginn.innerHTML = data[ 1 ] + " Uhr";
             } else {
                 beginn.innerHTML = " &nbsp;&nbsp;&nbsp;";
@@ -227,7 +227,7 @@ function makespie( elemID ){
 }
 
 function makespieZ( elemID ){ //all stacked display version (not so nice but mor robust i think)
-    console.log("Just make spie");
+    console.log("Just make spie Z");
     lemIDtoliveIN = elemID;
 	let intoElem = document.getElementById( elemID );
     //add spielplanmenu
@@ -701,10 +701,11 @@ function getallcsv( fkttocall, elmid ){
                 //console.log("got it", ent)
                 if( otherCSV.length == 0 ){
                     for( let e = 2; e < ent.length; e++ ){
-                           console.log( "aa", ent[ e ]);
+                           //console.log( "aa", ent[ e ]);
                             otherCSV.push(ent[ e ].replace(".csv", ""));
                         
                     }
+                    
                     fkttocall( elmid );
                 }
 		    }
