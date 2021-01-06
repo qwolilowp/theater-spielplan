@@ -15,14 +15,14 @@ function spipla(){
     console.log("Theater Javascript Spielplan rendering start");
     if( otherCSV.length === 0 ){
         //getallcsv( inpspie, "content" );
-        //getallcsv( makespie, "content" );
+        getallcsv( makespie, "content" );
         //getallcsv( makespieZ, "content" );
-        getallcsv( editspiepla, "content" );
+        //getallcsv( editspiepla, "content" );
     } else {
         //inpspie( "content" );
-        //makespie( "content" );
+        makespie( "content" );
         //makespieZ( "content" );
-        editspiepla( "content" );
+        //editspiepla( "content" );
     }
 }
 
@@ -48,6 +48,7 @@ function makespie( elemID ){
 
     let dd = new Date();
     let zahm = dd.getMonth()+1;
+    let zahy = dd.getFullYear();
     let zahmnext = zahm+1;
     if( 12 < zahmnext ){
         zahmnext = zahmnext - 12;
@@ -73,11 +74,16 @@ function makespie( elemID ){
     }
     console.log("This Mo", currmonatzahl, "n", currmonatzahlo, "nn", currmonatzahloo);
     console.log(otherCSV);
+    let yearrelevant = false;
     for( let c = 0; c < otherCSV.length; c++){
-        console.log(currmonatzahl == otherCSV[ c ].split("-")[0], currmonatzahl, otherCSV[ c ].split("-")[0]);
-        if( currmonatzahl == otherCSV[ c ].split("-")[0] || 
+        console.log( currmonatzahl == otherCSV[ c ].split("-")[0], currmonatzahl, otherCSV[ c ].split("-")[0], otherCSV[ c ].split("-")[1]);
+        if( (parseInt(otherCSV[ c ].split("-")[1]) === zahy && zahm <= otherCSV[ c ].split("-")[0] ) || 
+            (parseInt(otherCSV[ c ].split("-")[1]) !== zahy && zahm > otherCSV[ c ].split("-")[0] ) ){
+            yearrelevant = true;
+        }
+        if( yearrelevant && (currmonatzahl == otherCSV[ c ].split("-")[0] || 
             currmonatzahlo == otherCSV[ c ].split("-")[0] || 
-            currmonatzahloo == otherCSV[ c ].split("-")[0] ){
+            currmonatzahloo == otherCSV[ c ].split("-")[0]) ){
             let m = document.createElement( "span" );
             if( c < otherCSV.length-1 ){
                 m.innerHTML = zahlenzumonate[ otherCSV[ c ].split("-")[0] ] + "&emsp;|";
@@ -89,6 +95,7 @@ function makespie( elemID ){
             m.onclick = function(){ settoopen(this); };
             spiemeni.appendChild( m );
         }
+        yearrelevant = false;
     }
     //spiemeni.innerHTML = spiemeni.innerHTML + "&emsp;&emsp;&emsp;&emsp;&emsp;Kartentelefon +49 (361)5982924"
     
@@ -238,6 +245,7 @@ function makespieZ( elemID ){ //all stacked display version (not so nice but mor
 
     let dd = new Date();
     let zahm = dd.getMonth()+1;
+    let zahy = dd.getFullYear();
     let zahmnext = zahm+1;
     if( 12 < zahmnext ){
         zahmnext = zahmnext - 12;
@@ -262,12 +270,17 @@ function makespieZ( elemID ){ //all stacked display version (not so nice but mor
         currmonatzahloo = "0" + currmonatzahloo;
     }
     console.log("This Mo", currmonatzahl, "n", currmonatzahlo, "nn", currmonatzahloo);
+    let yearrelevant = false;
     
     for( let c = 0; c < otherCSV.length; c++){
-        console.log(currmonatzahl == otherCSV[ c ].split("-")[0], currmonatzahl, otherCSV[ c ].split("-")[0]);
-        if( currmonatzahl == otherCSV[ c ].split("-")[0] || 
+        console.log( zahm, zahy, currmonatzahl == otherCSV[ c ].split("-")[0], currmonatzahl, otherCSV[ c ].split("-")[0]);
+        if( (parseInt(otherCSV[ c ].split("-")[1]) === zahy && zahm <= otherCSV[ c ].split("-")[0] ) || 
+            (parseInt(otherCSV[ c ].split("-")[1]) !== zahy && zahm > otherCSV[ c ].split("-")[0] ) ){
+            yearrelevant = true;
+        }
+        if( yearrelevant && (currmonatzahl == otherCSV[ c ].split("-")[0] || 
             currmonatzahlo == otherCSV[ c ].split("-")[0] || 
-            currmonatzahloo == otherCSV[ c ].split("-")[0] ){
+            currmonatzahloo == otherCSV[ c ].split("-")[0]) ){
             let m = document.createElement( "span" );
             if( c < otherCSV.length-1 ){
                 m.innerHTML = zahlenzumonate[ otherCSV[ c ].split("-")[0] ] + "&emsp;|";
@@ -279,6 +292,7 @@ function makespieZ( elemID ){ //all stacked display version (not so nice but mor
             m.onclick = function(){ settoopenZ(this); };
             spiemeni.appendChild( m );
         }
+        yearrelevant = false;
     }
     //spiemeni.innerHTML = spiemeni.innerHTML + "&emsp;&emsp;&emsp;&emsp;&emsp;Kartentelefon +49 (361)5982924"
     
@@ -699,13 +713,32 @@ function getallcsv( fkttocall, elmid ){
 		    if ( http.readyState == 4 && http.status == 200 ) {
                 let ent = http.responseText.split(";;");
                 //console.log("got it", ent)
+                let sortedyear = {};
                 if( otherCSV.length == 0 ){
                     for( let e = 2; e < ent.length; e++ ){
-                           //console.log( "aa", ent[ e ]);
-                            otherCSV.push(ent[ e ].replace(".csv", ""));
-                        
+                        let onlyfilename = ent[ e ].replace(".csv", "");
+                            let moyear = onlyfilename.split("-");
+                            //console.log( "aa", ent[ e ], moyear);
+                            if( sortedyear[parseInt(moyear[1])] ){
+                                sortedyear[parseInt(moyear[1])][parseInt(moyear[0])] = onlyfilename;
+                            } else {
+                                let obj = {};
+                                obj[parseInt(moyear[0])] = onlyfilename;
+                                sortedyear[parseInt(moyear[1])] = obj;
+                            }
+                            //otherCSV.push(ent[ e ].replace(".csv", ""));
                     }
-                    
+                    //console.log(sortedyear);
+                    let onlyyear = Object.keys( sortedyear );
+                    console.log(onlyyear);
+                    for( let o = 0; o < onlyyear.length; o+=1 ){
+                        let months = Object.keys(sortedyear[onlyyear[o]]);
+                        for( let m in months ){
+                            console.log("push", o, m, onlyyear[o], months[m],sortedyear[onlyyear[o]][months[m]]);
+                            otherCSV.push( sortedyear[onlyyear[o]][months[m]] );
+
+                        }
+                    }
                     fkttocall( elmid );
                 }
 		    }
