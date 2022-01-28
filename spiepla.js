@@ -57,6 +57,10 @@ function makespie( elemID ){
     if( 12 < zahmnextnext ){
         zahmnextnext = zahmnextnext - 12;
     }
+    let zahmnextnextnext = zahmnextnext + 1;
+    if( 12 < zahmnextnextnext ){
+        zahmnextnextnext = zahmnextnextnext - 12;
+    }
 
     let currmonatzahl = zahm.toString();
     if( currmonatzahl.length == 1){
@@ -72,6 +76,11 @@ function makespie( elemID ){
     if( currmonatzahloo.length == 1){
         currmonatzahloo = "0" + currmonatzahloo;
     }
+
+    let currmonatzahlooo = zahmnextnextnext.toString();
+    if( currmonatzahlooo.length == 1){
+        currmonatzahlooo = "0" + currmonatzahlooo;
+    }
     console.log("This Mo", currmonatzahl, "n", currmonatzahlo, "nn", currmonatzahloo);
     console.log(otherCSV);
     let yearrelevant = false;
@@ -83,7 +92,8 @@ function makespie( elemID ){
         }
         if( yearrelevant && (currmonatzahl == otherCSV[ c ].split("-")[0] || 
             currmonatzahlo == otherCSV[ c ].split("-")[0] || 
-            currmonatzahloo == otherCSV[ c ].split("-")[0]) ){
+            currmonatzahloo == otherCSV[ c ].split("-")[0])|| 
+            currmonatzahlooo == otherCSV[ c ].split("-")[0]) ){
             let m = document.createElement( "span" );
             if( c < otherCSV.length-1 ){
                 m.innerHTML = zahlenzumonate[ otherCSV[ c ].split("-")[0] ] + "&emsp;|";
@@ -255,6 +265,11 @@ function makespieZ( elemID ){ //all stacked display version (not so nice but mor
         zahmnextnext = zahmnextnext - 12;
     }
 
+    let zahmnextnextnext = zahmnextnext + 1;
+    if( 12 < zahmnextnextnext ){
+        zahmnextnextnext = zahmnextnextnext - 12;
+    }
+
     let currmonatzahl = zahm.toString();
     if( currmonatzahl.length == 1){
         currmonatzahl = "0" + currmonatzahl;
@@ -269,6 +284,11 @@ function makespieZ( elemID ){ //all stacked display version (not so nice but mor
     if( currmonatzahloo.length == 1){
         currmonatzahloo = "0" + currmonatzahloo;
     }
+
+    let currmonatzahlooo = zahmnextnextnext.toString();
+    if( currmonatzahlooo.length == 1){
+        currmonatzahlooo = "0" + currmonatzahlooo;
+    }
     console.log("This Mo", currmonatzahl, "n", currmonatzahlo, "nn", currmonatzahloo);
     let yearrelevant = false;
     
@@ -280,7 +300,8 @@ function makespieZ( elemID ){ //all stacked display version (not so nice but mor
         }
         if( yearrelevant && (currmonatzahl == otherCSV[ c ].split("-")[0] || 
             currmonatzahlo == otherCSV[ c ].split("-")[0] || 
-            currmonatzahloo == otherCSV[ c ].split("-")[0]) ){
+            currmonatzahloo == otherCSV[ c ].split("-")[0]) || 
+            currmonatzahlooo == otherCSV[ c ].split("-")[0]) ){
             let m = document.createElement( "span" );
             if( c < otherCSV.length-1 ){
                 m.innerHTML = zahlenzumonate[ otherCSV[ c ].split("-")[0] ] + "&emsp;|";
@@ -934,3 +955,4 @@ function cleantext( atext ){
     let t22 = t21.split("&amp;").join("&");
     return t22;
 }
+
