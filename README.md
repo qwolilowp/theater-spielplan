@@ -7,7 +7,7 @@ Ein einfacher Theater Spielplan mit email Anbindung und online Administration, E
 
 Eingabe der vorbereiteten Daten im CSV Format. Die Datei ist aus Exel / OO zu exportieren und im einfachen Frontend unter Angabe von Spielplanmonat und Jahr hochzuladen.
 
-# Edit
+# Editieren
 
 ![Edit-Ansicht](/doku/edit.png)
 
